@@ -1,5 +1,5 @@
 body {
-	background-color: pink;
+	background-color: #c33764;
 	text-align: center;
 	margin-top: 200px;
 }
@@ -14,9 +14,15 @@ body {
 button {
 	width: 100px;
 	height: 40px;
-	background-color: blue; 
+	background-color: #b06ab3; 
 }
 
 button:hover {
 	cursor: pointer;
 }
+
+h1 {
+	color: #34e89e;
+
+}
+

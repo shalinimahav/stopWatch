@@ -3,15 +3,19 @@
 //anything given to this is printed into watch
 //variables that are not pre fixed with 'this' are local to just that function
 
-function stopWatch(){
+function stopWatch(elem){
 
 	var time=0;
 	var interval;
 	var offSet;   					//To calculate how much time is passed.
 
-	function update() {				//Private Functions
-		time += delta();
+	function update() {	
+		if(this.isOn) {
+			time += delta();
+		}
+		
 		var formattedTime = timeFormatter(time);
+		elem.textContent = formattedTime;
 	}
 
 	function delta() {
@@ -27,6 +31,7 @@ function stopWatch(){
 		var minutes = time.getMinutes().toString();
 		var seconds = time.getSeconds().toString();
 		var milliseconds = time.getMilliseconds().toString();
+		
 		if(minutes.length < 2){
 			minutes = '0' + minutes;
 		}
@@ -35,7 +40,7 @@ function stopWatch(){
 			seconds = '0' + seconds;
 		}
 
-		while(milliseconds.length < 2){
+		while(milliseconds.length < 3){
 			milliseconds = '0' + milliseconds;
 		}
 
@@ -48,7 +53,7 @@ function stopWatch(){
 
 	this.start = function(){
 		if(!this.isOn){
-			interval = setInterval(update, 10);
+			interval = setInterval(update.bind(this), 10);
 			offSet = Date.now();
 			this.isOn = true;  	        	
 
@@ -66,6 +71,7 @@ function stopWatch(){
 
 	this.reset = function(){
 		time = 0;
+		update();
 	};
 
 }
